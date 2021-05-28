@@ -267,8 +267,13 @@ username=User3
 password=1234
 ```
 
-## Replace the from-extensions context with something simple
+## Update the Dialplan
 ```
+[subscriptions]
+exten => 100,hint,PJSIP/User1
+exten => 200,hint,PJSIP/User2
+exten => 300,hint,PJSIP/User3
+
 [from-extensions]
 exten => 100,1,Dial(PJSIP/User1,30)
 exten => 200,1,Dial(PJSIP/User2,30)
