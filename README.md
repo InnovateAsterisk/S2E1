@@ -212,8 +212,8 @@ Listen 0.0.0.0:4431 # Asterisk Websocket
         SSLCompression off
         SSLOptions +StrictRequire
 
-        ProxyPass "/ws" "ws://127.0.0.1:8080/ws"
-        ProxyPassReverse "/ws" "ws://127.0.0.1:8080/ws"
+        ProxyPass /ws ws://127.0.0.1:8080/ws
+        ProxyPassReverse /ws ws://127.0.0.1:8080/ws
 </VirtualHost>
 
 # service apache2 restart
