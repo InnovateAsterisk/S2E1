@@ -1,12 +1,12 @@
 # Season 2, Episode 1
 In this episode we look at how to correctly host your HTML files, and reverse proxy the ws/ (Websocket) connections back to the Asterisk Service. It's all done on a single local instance so we are using a self signed certificate.
 
-# Raspberry Pi Imager v 1.6.1
+### Raspberry Pi Imager v 1.6.1
 Raspberry Pi OS
 
 **Make sure you write the ssh file to the root of the boot directory**
 
-## Log into Raspberry Pi
+### Log into Raspberry Pi
 Usging Putty (Windows) or Console (Mac/Linux), enter the following:
 ```
 ssh pi@raspberrypi.local
@@ -20,7 +20,7 @@ $ sudo su
 # apt-get install ntp git samba
 ```
 
-## Install Samba
+### Install Samba
 ```
 # smbpasswd -a pi
 # nano /etc/samba/smb.conf
@@ -41,7 +41,7 @@ force user = root
 # exit
 ```
 
-## Asterisk 18
+### Asterisk 18
 ```
 $ cd ~
 $ wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-18-current.tar.gz
@@ -60,18 +60,18 @@ $ sudo su
 # exit
 ```
 
-# Creating the OpenSSL Certificates
+### Creating the OpenSSL Certificates
 ```
 $ mkdir ~/ca && mkdir ~/certs && mkdir ~/csr
 ```
 
-## Create Root CA Key
+### Create Root CA Key
 ```
 $ openssl genrsa -des3 -out ~/ca/RaspberryPi-Root-CA.key 4096
 ```
 password: password
 
-## Create Root Certificate Authority Certificate
+### Create Root Certificate Authority Certificate
 ```
 $ openssl req -x509 -new -nodes -key ~/ca/RaspberryPi-Root-CA.key -sha256 -days 3650 -out ~/ca/RaspberryPi-Root-CA.crt
 ```
@@ -88,7 +88,7 @@ Common Name (e.g. server FQDN or YOUR name) []: Raspberry Pi Root CA
 Email Address []: conradjdw@gmail.com
 ```
 
-## Generate Certificate Signing Request & Private Key
+### Generate Certificate Signing Request & Private Key
 ```
 $ openssl req -new -sha256 -nodes -out ~/csr/raspberrypi.csr -newkey rsa:2048 -keyout ~/certs/raspberrypi.key
 ```
@@ -109,7 +109,7 @@ A challenge password []:
 An optional company name []:
 ```
 
-## Generate Certificate
+### Generate Certificate
 ```
 $ nano ~/csr/openssl-v3.cnf
 
@@ -122,22 +122,22 @@ subjectAltName = @alt_names
 DNS.1 = raspberrypi.local
 ```
 
-## Generate Certificate
+### Generate Certificate
 ```
 $ openssl x509 -req -in ~/csr/raspberrypi.csr -CA ~/ca/RaspberryPi-Root-CA.crt -CAkey ~/ca/RaspberryPi-Root-CA.key -CAcreateserial -out ~/certs/raspberrypi.crt -days 365 -sha256 -extfile ~/csr/openssl-v3.cnf
 ```
 
-## PEM Combo Certificate
+### PEM Combo Certificate
 ```
 $ cat ~/certs/raspberrypi.crt ~/certs/raspberrypi.key > ~/certs/raspberrypi.pem
 ```
 
-## Set Permission to Key
+### Set Permission to Key
 ```
 $ chmod a+r ~/certs/raspberrypi.key
 ```
 
-## Git This Project
+### Git This Project
 ```
 $ git clone https://github.com/InnovateAsterisk/S2E1.git
 ```
@@ -146,7 +146,7 @@ Copy the config folder to asterisk folder
 $ sudo cp ~/S2E1/config/* /etc/asterisk
 ```
 
-## Configure HTTP
+### Configure HTTP
 ```
 $ sudo nano /etc/asterisk/http.conf
 
@@ -160,7 +160,7 @@ enablestatic=no
 $ sudo service asterisk restart
 ```
 
-## Apache
+### Apache
 ```
 $ sudo su
 # apt-get install apache2
@@ -224,7 +224,7 @@ Check with
 netstat -tunlp
 ```
 
-## Add Some Users
+### Add Some Users
 
 ```
 ; == Users
@@ -267,7 +267,7 @@ username=User3
 password=1234
 ```
 
-## Update the Dialplan
+### Update the Dialplan
 ```
 [subscriptions]
 exten => 100,hint,PJSIP/User1
