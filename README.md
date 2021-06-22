@@ -75,7 +75,7 @@ password: password
 ```
 $ openssl req -x509 -new -nodes -key ~/ca/RaspberryPi-Root-CA.key -sha256 -days 3650 -out ~/ca/RaspberryPi-Root-CA.crt
 ```
-password: password
+password: password **Please note that password is not a safe password at all, so please make sure you use a strong password, and keep this KEY file safe.**
 
 When asked complete fields like below:
 ```
