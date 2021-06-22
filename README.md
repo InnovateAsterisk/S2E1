@@ -162,6 +162,7 @@ $ sudo service asterisk restart
 
 ### Apache
 ```
+$ cd ~
 $ sudo su
 # apt-get install apache2
 # a2enmod ssl
@@ -172,7 +173,7 @@ $ sudo su
 # nano /etc/apache2/ports.conf
 Listen 0.0.0.0:80
 Listen 0.0.0.0:443
-Listen 0.0.0.0:4431 # Asterisk Websocket
+Listen 0.0.0.0:4431
 
 # nano /etc/apache2/sites-enabled/000-default.conf
 <VirtualHost 0.0.0.0:80>
