@@ -58,6 +58,7 @@ $ sudo su
 # make menuselect
 # make && make install && make config
 # exit
+$ cd ~
 ```
 
 ### Creating the OpenSSL Certificates
