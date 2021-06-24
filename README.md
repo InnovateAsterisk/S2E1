@@ -1,6 +1,8 @@
 # Season 2, Episode 1
 In this episode we look at how to correctly host your HTML files, and reverse proxy the ws/ (Websocket) connections back to the Asterisk Service. It's all done on a single local instance so we are using a self signed certificate.
 
+[![View on YouTube](https://img.youtube.com/vi/6wch9Ct32co/0.jpg)](https://www.youtube.com/watch?v=6wch9Ct32co)
+
 ### Raspberry Pi Imager v 1.6.1
 Raspberry Pi OS
 
